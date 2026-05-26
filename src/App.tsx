@@ -20,6 +20,7 @@ import {
   ArrowRight,
   Maximize2
 } from "lucide-react";
+import { Analytics } from "@vercel/analytics/react";
 import { Article, SecurityEventLog } from "./types";
 
 export default function App() {
@@ -350,7 +351,7 @@ export default function App() {
   // Trigger Gemini SEO optimization
   const handleAISEOOptimize = async (id: string) => {
     setIsOptimizing(id);
-    triggerToast("ปรับวิถีทางเว็บบล็อกส่วนตัว", "Gemini กำลังคำนวณอัตราคำดัชนี จัดโครงสร้างหน้าเว็บ และปรับ Core Web Vitals...", "success");
+    triggerToast("ปรับวิถีทางเว็บบล็อ��ส่วนตัว", "Gemini กำลังคำนวณอัตราคำดัชนี จัดโครงสร้างหน้าเว็บ และปรับ Core Web Vitals...", "success");
     try {
       const res = await fetch(`/api/articles/${id}/seo-optimize`, {
         method: "POST"
@@ -1149,7 +1150,7 @@ export default function App() {
 
               <div className="space-y-1.5">
                 <label className="text-xs text-slate-400 font-bold uppercase tracking-wider block">
-                  คำโปรยนำสั้นสำหรับผู้ค้าค้นหา (Meta Excerpt Description) - ตัวเลือกเพิ่มเติม
+                  คำโปรยนำสั้นสำหรับผู้ค้า��้นหา (Meta Excerpt Description) - ตัวเลือกเพิ่มเติม
                 </label>
                 <input
                   type="text"
@@ -1561,6 +1562,7 @@ export default function App() {
         </div>
       </footer>
 
+      <Analytics />
     </div>
   );
 }
