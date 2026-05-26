@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Shield,
   Activity,
@@ -43,6 +43,10 @@ export default function App() {
   // Selected state
   const [selectedArticleId, setSelectedArticleId] = useState<string | null>(null);
   const [selectedArticleLang, setSelectedArticleLang] = useState<string>("th");
+
+  // Scroll Progress references and states
+  const articleViewerRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Input states for new post
   const [newTitle, setNewTitle] = useState("");
@@ -419,6 +423,28 @@ export default function App() {
     );
   });
 
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const scrollTop = container.scrollTop;
+    const scrollHeight = container.scrollHeight;
+    const clientHeight = container.clientHeight;
+    const totalScroll = scrollHeight - clientHeight;
+    if (totalScroll > 0) {
+      const progress = (scrollTop / totalScroll) * 100;
+      setScrollProgress(progress);
+    } else {
+      setScrollProgress(0);
+    }
+  };
+
+  // Reset scroll location & progress on selection changes
+  useEffect(() => {
+    if (articleViewerRef.current) {
+      articleViewerRef.current.scrollTop = 0;
+    }
+    setScrollProgress(0);
+  }, [selectedArticleId, selectedArticleLang]);
+
   return (
     <div className="min-h-screen bg-[#070708] text-slate-100 flex flex-col font-sans select-none relative overflow-x-hidden">
       
@@ -762,9 +788,25 @@ export default function App() {
               </div>
               
               {/* RIGHT WORKSPACE: Selected Article Viewer & Dynamic Controls */}
-              <div className="lg:col-span-8 bg-white/5 rounded-3xl border border-white/5 p-6 space-y-6">
+              <div className="lg:col-span-8 bg-white/5 rounded-3xl border border-white/5 flex flex-col h-[880px] relative overflow-hidden shadow-2xl">
                 
-                {activeArticle && activeArticleContent ? (
+                {/* Scroll Progress Bar at the top of the article viewer */}
+                {activeArticle && activeArticleContent && (
+                  <div className="w-full bg-[#131316] h-1.5 relative z-30 border-b border-white/5">
+                    <div 
+                      className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 h-1.5 transition-all duration-75 ease-out shadow-[0_0_10px_rgba(59,130,246,0.8)]"
+                      style={{ width: `${scrollProgress}%` }}
+                    ></div>
+                  </div>
+                )}
+                
+                <div 
+                  ref={articleViewerRef}
+                  onScroll={handleScroll}
+                  className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar"
+                >
+                  
+                  {activeArticle && activeArticleContent ? (
                   <div className="space-y-6">
                     
                     {/* Active Article Metadata Header */}
@@ -773,29 +815,37 @@ export default function App() {
                       <div className="flex flex-wrap items-center justify-between gap-4">
                         
                         {/* Target Language Toggle for currently read Article */}
-                        <div className="flex items-center space-x-2">
-                          <span className="text-xs text-slate-400 font-bold font-mono">
-                            Language Target:
-                          </span>
-                          <div className="flex bg-[#0a0a0b] p-1 rounded-xl border border-white/10 font-mono text-[11px] font-bold">
-                            {["th", "en", "jp", "zh"].map((lang) => {
-                              const exists = !!activeArticle.languages[lang];
-                              return (
-                                <button
-                                  key={lang}
-                                  onClick={() => setSelectedArticleLang(lang)}
-                                  className={`px-3 py-1 rounded-lg transition-all ${
-                                    selectedArticleLang === lang
-                                      ? "bg-indigo-600 text-white"
-                                      : exists
-                                      ? "text-slate-300 hover:text-white hover:bg-white/5"
-                                      : "text-slate-600 hover:text-slate-400 hover:bg-white/5"
-                                  }`}
-                                >
-                                  {lang.toUpperCase()} {!exists && "+"}
-                                </button>
-                              );
-                            })}
+                        <div className="flex flex-wrap items-center gap-4">
+                          <div className="flex items-center space-x-2">
+                            <span className="text-xs text-slate-400 font-bold font-mono">
+                              Language Target:
+                            </span>
+                            <div className="flex bg-[#0a0a0b] p-1 rounded-xl border border-white/10 font-mono text-[11px] font-bold">
+                              {["th", "en", "jp", "zh"].map((lang) => {
+                                const exists = !!activeArticle.languages[lang];
+                                return (
+                                  <button
+                                    key={lang}
+                                    onClick={() => setSelectedArticleLang(lang)}
+                                    className={`px-3 py-1 rounded-lg transition-all ${
+                                      selectedArticleLang === lang
+                                        ? "bg-indigo-600 text-white"
+                                        : exists
+                                        ? "text-slate-300 hover:text-white hover:bg-white/5"
+                                        : "text-slate-600 hover:text-slate-400 hover:bg-white/5"
+                                    }`}
+                                  >
+                                    {lang.toUpperCase()} {!exists && "+"}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+
+                          {/* Live Scroll Progress badge indicator */}
+                          <div className="bg-[#0a0a0b] px-3 py-1.5 rounded-xl border border-white/15 flex items-center space-x-2 font-mono text-[11px] h-[34px]">
+                            <span className="text-[#818cf8] font-bold">Progress:</span>
+                            <span className="text-emerald-400 font-black">{Math.round(scrollProgress)}%</span>
                           </div>
                         </div>
 
@@ -1062,6 +1112,7 @@ export default function App() {
                   </div>
                 )}
 
+                </div>
               </div>
 
             </div>
