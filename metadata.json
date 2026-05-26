@@ -1,0 +1,6 @@
+{
+  "name": "REXDEVCYBERCYBER-SECURITY",
+  "description": "ระบบบล็อกความปลอดภัยไซเบอร์และแดชบอร์ดหลายภาษาที่ช่วยป้องกันและตรวจสอบภัยคุกคามไซเบอร์ พร้อมระบบตรวจจับและวิเคราะห์บทความอย่างมีประสิทธิภาพ",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

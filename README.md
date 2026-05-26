@@ -1,11 +1,65 @@
-<div align="center">
+# REXDEVCYBERCYBER-SECURITY
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+**REXDEVCYBERCYBER-SECURITY** คือระบบจำลองเว็บบล็อกส่วนตัวและความปลอดภัยไซเบอร์แบบครบวงจร (Multilingual Personal Blog with Cyber Threat Prevention & Detection System) นำเสนอสถาปัตยกรรมประสิทธิภาพสูงเช่นเดียวกับ Next.js รองรับการเขียนบทความหลายภาษา และสนับสนุนการจัดอันดับ SEO ความเร็วสูง พร้อมเสริมแอนจินความปลอดภัย 3 เลเยอร์หลักเพื่อรับมือและแก้ไขภัยคุกคามทางไซเบอร์ในระดับแอปพลิเคชันอย่างสมบูรณ์แบบ
 
-  <h1>Built with AI Studio</h2>
+---
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## 🛡️ สถาปัตยกรรมความครอบคลุม (Key Systems)
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+ระบบมีการแบ่งหน้าที่การประมวลผลและการรักษาความปลอดภัยออกเป็น 3 แกนหลักตามข้อสั่งการ:
 
-</div>
+1. **ระบบ REXDEV (การป้องกันการโจมตีไซเบอร์ / Cyber Attack Prevention)**
+   - ทำการกรองและทำความสะอาดข้อมูลดิบนำเข้า (Input Sanitization) ก่อนจะส่งข้อมูลเข้าไปในฐานข้อมูลหรือแสดงผล
+   - ป้องกันและบล็อกสคริปต์ไม่ต้องการประเภท Cross-Site Scripting (XSS) และ SQL Injection (SQLi) ที่ส่งมาจากฟอร์มหรือ query parameters ทันควันโดยไม่ต้องรันสู่สแต็คระบบชั้นใน
+
+2. **ระบบ CYBER (การตรวจสอบการโจมตีไซเบอร์ / Cyber Threat Auditing & Logging)**
+   - สตรีมล็อกบันทึกการเข้าถึงข้อมูลและการตรวจสแกนพฤติกรรม (Live Security logs streaming) ตลอด 24 ชั่วโมง
+   - ติดตามรูปแบบพฤติกรรมผู้บุกรุก เช่น เครื่องมือ Brute Force, API endpoints scannings และเก็บบันทึกรอยเท้าดิจิทัลไว้อย่างตรงไปตรงมา ไม่สามารถพรางตาได้
+
+3. **ระบบ SECURITY (การรักษาความปลอดภัยของข้อมูล / Data Integrity & Protection)**
+   - ควบคุมนโยบายและลายเซ็นความน่าเชื่อถือทางดิจิทัลของสภาพแวดล้อมระบบ (Data Integrity Verification)
+   - ป้องกันการดัดแปลงแก้ไขและกู้คืน snapshot ข้อมูลโดยอัตโนมัติหากพบความเบี่ยงเบนจากภายนอก
+   - ใช้หลักการเข้ารหัสและการจัดการสิทธิ์ผู้ใช้งานระดับสูง
+
+---
+
+## 🚀 ฟังก์ชันหลักของแอปพลิเคชัน (Core Shield Functions)
+
+* **1. การตรวจสอบการเข้าถึง (Access Verification Audit)**
+  - คอยตรวจสอบสิทธิ์การเข้าใช้งานบทความลับ สถิติการบุกรุก และการคีย์คำสั่งแฮก เพื่อให้แน่ใจว่าไม่มีผู้เข้าใช้ที่ไม่ประสงค์ดีเล็ดลอด
+* **2. การตรวจสอบการเปลี่ยนแปลง (Modification Tracker)**
+  - ระบบตรวจสอบลายเซ็นโครงสร้าง (Snapshot Signatures) และรายงานแอบแฝงบันทึกทุกครั้งที่มีการเขียน แก้ไข หรือลบบทความออกจากระบบบล็อก
+* **3. การป้องกันการโจมตี (Proactive Cyber Interception)**
+  - รันแอนจินประเมินผลและสลัดสิทธิ์แฮกเกอร์ทันทีเมื่อมีการละเมิด (Active Intercept) พร้อมระบบ Rate-limiting คุมปริมาณการรับส่งข้อมูลของเซสชัน
+
+---
+
+## 🤖 ระบบขับเคลื่อนอัจฉริยะ (AI-Powered Core by Gemini)
+
+เพื่อผลลัพธ์ประสิทธิภาพสูงสุด ระบบได้ติดตั้งพลังความสามารถของ **Gemini 3.5 Flash** ผ่าน SDK ทันสมัย `@google/genai`:
+* **AI SEO Optimization Evaluation**: วิเคราะห์ความหนาแน่นคำดัชนี จัดรูปแบบโครงสร้าง Header หน้าบล็อก แนะนำ Canonical, Meta tags และประเมินคะแนน SEO ทันทีเพื่อให้ติดหน้าค้นหาได้รวดเร็วที่สุด
+* **AI High-Fidelity Translation**: แปลเนื้อหาบทความวิชาการความปลอดภัยทางเทคนิคหลายภาษา (th, en, jp, zh) โดยไม่เพี้ยนบริบทของคำเฉพาะทางเทคนิค
+* **AI Deep Security Code Vulnerability Scan**: แซนด์บ็อกซ์และถอดรหัสวิเคราะห์ช่องโหว่ความเสี่ยงรายบทความ พร้อมชี้ข้อเสนอแนะสำหรับการป้องกันของระบบ REXDEV, เฝ้าระวังของระบบ CYBER และมาตรการของระบบ SECURITY
+
+---
+
+## 🛠️ สแต็คเทคโนโลยีและวิธีการรัน (Technology Stack & Guide)
+
+* **Frontend**: React 19, TypeScript, Tailwind CSS v4, Lucide Icons, Framer Motion
+* **Backend**: Express + Vite Hybrid Server-side (รองรับ TS Native build & bundling ผ่าน Esbuild คลีนและรวดเร็ว)
+* **AI**: Google GenAI Node SDK (`@google/genai`) กับโมเดล `gemini-3.5-flash`
+
+### คำสั่งใช้งาน
+
+1. **ดาวน์โหลดและติดตั้งโมดูล:**
+   ```bash
+   npm install
+   ```
+2. **รันระบบพัฒนา (Development Server):**
+   ```bash
+   npm run dev
+   ```
+3. **คอมไพล์สำหรับนำขึ้นเซิร์ฟเวอร์ผลิต (Production Build):**
+   ```bash
+   npm run build
+   ```
